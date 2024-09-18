@@ -30,7 +30,10 @@ class BasicAuth(Auth):
                 return None
         return None
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> Tuple[Optional[str], Optional[str]]:
+    def extract_user_credentials(
+            self,
+            decoded_base64_authorization_header: str,
+            ) -> Tuple[str, str]:
         """Extracts user credentials from a Base64-decoded authorization header."""
         if isinstance(decoded_base64_authorization_header, str):
             pattern = r'(?P<user>[^:]+):(?P<password>.+)'
@@ -39,7 +42,10 @@ class BasicAuth(Auth):
                 return match.group('user'), match.group('password')
         return None, None
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> Optional[User]:
+    def user_object_from_credentials(
+            self,
+            user_email: str,
+            user_pwd: str) -> TypeVar('User'):
         """Retrieves a user based on the user's authentication credentials."""
         if isinstance(user_email, str) and isinstance(user_pwd, str):
             try:

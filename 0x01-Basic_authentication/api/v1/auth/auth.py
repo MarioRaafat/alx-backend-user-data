@@ -19,7 +19,7 @@ class Auth:
             exclusion_path = exclusion_path.strip()
             if not exclusion_path:
                 continue
-            
+
             # Build pattern based on exclusion path
             if exclusion_path.endswith('*'):
                 pattern = re.escape(exclusion_path[:-1]) + '.*'
@@ -27,7 +27,7 @@ class Auth:
                 pattern = re.escape(exclusion_path[:-1]) + '/.*'
             else:
                 pattern = re.escape(exclusion_path) + '/.*'
-            
+
             # Match the path against the pattern
             if re.fullmatch(pattern, path):
                 return False

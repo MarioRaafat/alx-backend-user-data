@@ -58,7 +58,7 @@ def authenticate_user():
         if request.path not in exempt_paths:
             if auth.authorization_header(request) is None:
                 abort(401, description="Unauthorized")
-            
+
             if auth.current_user(request) is None:
                 abort(403, description="Forbidden")
 
