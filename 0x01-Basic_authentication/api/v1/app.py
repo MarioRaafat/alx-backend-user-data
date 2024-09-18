@@ -11,6 +11,9 @@ import os
 
 load_dotenv()
 
+host = os.getenv('API_HOST', '127.0.0.1')
+port = os.getenv('API_PORT', '5000')
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -25,6 +28,6 @@ def not_found(error) -> str:
 
 
 if __name__ == "__main__":
-    host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
+    # host = getenv("API_HOST", "0.0.0.0")
+    # port = getenv("API_PORT", "5000")
     app.run(host=host, port=port)
