@@ -50,18 +50,17 @@ def authenticate_user():
     """Authenticates a user before processing a request.
     """
     if auth:
-        excluded_paths = [
+        exempt_paths  = [
             '/api/v1/status/',
             '/api/v1/unauthorized/',
             '/api/v1/forbidden/',
         ]
-        if auth.require_auth(request.path, excluded_paths):
-            auth_header = auth.authorization_header(request)
-            user = auth.current_user(request)
-            if auth_header is None:
-                abort(401)
-            if user is None:
-                abort(403)
+        if request.path not in exempt_paths:
+            if auth.authorization_header(request) is None:
+                abort(401, description="Unauthorized")
+            
+            if auth.current_user(request) is None:
+                abort(403, description="Forbidden")
 
 
 if __name__ == "__main__":
