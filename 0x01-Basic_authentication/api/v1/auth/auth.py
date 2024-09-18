@@ -14,7 +14,7 @@ class Auth:
         """
         if not path or not excluded_paths:
             return True
-        
+
         for exclusion_path in excluded_paths:
             exclusion_path = exclusion_path.strip()
             if not exclusion_path:
@@ -31,7 +31,7 @@ class Auth:
             # Match the path against the pattern
             if re.fullmatch(pattern, path):
                 return False
-        
+
         return True
 
     def authorization_header(self, request=None) -> str:
