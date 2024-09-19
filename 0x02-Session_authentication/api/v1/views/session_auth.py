@@ -13,13 +13,13 @@ from api.v1.views import app_views
 def login() -> Tuple[str, int]:
     """POST /api/v1/auth_session/login
     Return:
-        - JSON representation of a User object.
+      - JSON representation of a User object.
     """
     not_found_res = {"error": "no user found for this email"}
     email = request.form.get('email')
-    password = request.form.get('password')
     if email is None or len(email.strip()) == 0:
         return jsonify({"error": "email missing"}), 400
+    password = request.form.get('password')
     if password is None or len(password.strip()) == 0:
         return jsonify({"error": "password missing"}), 400
     try:
@@ -41,7 +41,7 @@ def login() -> Tuple[str, int]:
 def logout() -> Tuple[str, int]:
     """DELETE /api/v1/auth_session/logout
     Return:
-        - An empty JSON object.
+      - An empty JSON object.
     """
     from api.v1.app import auth
     is_destroyed = auth.destroy_session(request)
